@@ -16,12 +16,14 @@ ctx.lineWidth = 20;
 
 window.onerror = (e, l, s, c, r) => alert(r.stack);
 
-let position = [10, 10];
+let position = [0, 0];
 let input = document.getElementById("input");
 input.focus();
 input.addEventListener('keydown', async (event) => {
   if (event.key === 'Enter') {
+    //alert(`${input.value.length}`);
     await fetchanddraw(input.value);
+    
     input.value = '';
   }
 });
@@ -33,6 +35,7 @@ async function fetchanddraw(character) {
     //alert(text);
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     json = JSON.parse(text);
+    /*
     for (let stroke of json.medians) {
       position = [...stroke[0]];
       //sendToArduino(`M${position[0]}, ${position[1]}`);
@@ -42,7 +45,14 @@ async function fetchanddraw(character) {
         await sleep(100);
       }
     }
-
+    */
+    for (let stroke of json.medians) {
+      Serial.printLn("M,%d,%d\n", stroke[0]- position[0], stroke[1] - position[1]);
+      for (let coord of stroke) {
+        Serial.printLn("L,%d,%d\n", coord[0] - position[0], coord[1] - position[1]);
+        await sleep(100);
+      }
+    }
   });
 }
 
