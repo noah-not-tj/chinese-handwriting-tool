@@ -1,5 +1,7 @@
 canvas 
 {
+   width: 40vw;
+   height: 40vw;
    left: 10vw;
    position: fixed;
    display: block;
@@ -12,7 +14,9 @@ body {
    margin: 0;
 }
 #input {
-   margin-top: 2vw;
-   margin-left: 10vw;
+   width: 5vw;
+   height: 6vh;
+   margin-top: 2vh;
+   margin-left: 14vw;
    border: 4px solid black;
 }
