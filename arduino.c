@@ -49,6 +49,9 @@ void draw (Instruction j) {
 Instruction tokenize(char *s) {
     Instruction j;
     int i = sscanf(s, "%c,%d,%d", &j.v, &j.x, &j.y);
+    int i = 3;
+    j.v = 'M';
+    j.x, j.y = 100;
 
     if (i != 3) {
         error("didn't tokeny right");
@@ -65,10 +68,12 @@ void setup() {
 
 void loop() {
 
-    if (Serial.available > 0) {
-        char *incomingData = Serial.readStringUntil('\n');
-        draw(tokenize(incomingData));
+    //if (Serial.available > 0) {
+      //  char *incomingData = Serial.readStringUntil('\n');
+        //draw(tokenize(incomingData));
         
-    }
-    delay(100);
+    //}
+      irsend.sendLegoPowerFunctions(0, 0, 1, 0x1); // (Channel, Port, Toggle, Command)
+
+    delay(5000);
 }
